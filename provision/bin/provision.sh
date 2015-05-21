@@ -2,18 +2,28 @@
 
 # Shell provisioner for vagrant-splunk
 
-echo "Start VM Provision"
-echo "=========================================="
+# Put the name of your .deb here
+DEB=splunk-6.2.2-255606-linux-2.6-amd64.deb
 
-# Prequisites
+PORT=8000
 
+# get the important stuff first!
+sudo apt-get install cowsay
 
-# Splunk
+# now for Splunk
+sudo dpkg -i /vagrant/provision/lib/$DEB
 
+sudo /opt/splunk/bin/splunk start --accept-license
 
-# ?
+# TODO (galli): Configure Splunk to accept data, and example to oneshot data.
 
+IP=$(ifconfig eth1 | sed -ne 's/.*inet addr:\([0-9.]\+\) .*/\1/p')
 
-echo "=========================================="
-echo "End VM Provision"
+cowsay <<MOO
+Vagrant box IP: "${IP}"
+
+Splunk is available: "${IP}:${PORT}"
+
+moo!
+MOO
 
