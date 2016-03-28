@@ -1,0 +1,2 @@
+Files that end in .log, then they will be loaded in Splunk during vagrant up.
+You can set the Splunk index in Vagrantfile, SPLUNK_INDEX.

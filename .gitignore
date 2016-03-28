@@ -1,1 +1,5 @@
 *.deb
+.vagrant/*
+
+# Put IDE project excludes here
+*.komodoproject

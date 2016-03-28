@@ -1,2 +1,2 @@
 Put the Splunk .deb package in this directory.
-Don't forget to update ../bin/provision.sh DEB variable with your file name.
+Don't forget to update Vagrantfile SPLUNK_DEB variable with your file name.

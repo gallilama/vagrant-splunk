@@ -1,29 +1,30 @@
 #!/usr/bin/env bash
 
-# Shell provisioner for vagrant-splunk
+# Provision script that performs setup of Splunk and loads data.
 
-# Put the name of your .deb here
-DEB=splunk-6.2.2-255606-linux-2.6-amd64.deb
+# Install the necessities
+sudo apt-get -y install cowsay > /dev/null 2>&1 
+sudo dpkg -i /vagrant/provision/lib/${SPLUNK_DEB}
 
-PORT=8000
+# Start Splunk
+sudo ${SPLUNK_BIN} start --accept-license
 
-# get the important stuff first!
-sudo apt-get install cowsay
-
-# now for Splunk
-sudo dpkg -i /vagrant/provision/lib/$DEB
-
-sudo /opt/splunk/bin/splunk start --accept-license
-
-# TODO (galli): Configure Splunk to accept data, and example to oneshot data.
+# Load data into Splunk
+if [ -d "${DATA_DIR}" ]; then
+    # Setup Splunk index, and load sample data
+    ${SPLUNK_BIN} add index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
+  
+    # Any .log files in the directory will be loaded
+    for f in ${PROV_DIR}/data/*.log
+    do
+        ${SPLUNK_BIN} add oneshot "$f" -index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
+    done
+fi
 
 IP=$(ifconfig eth1 | sed -ne 's/.*inet addr:\([0-9.]\+\) .*/\1/p')
 
 cowsay <<MOO
-Vagrant box IP: "${IP}"
 
-Splunk is available: "${IP}:${PORT}"
+Splunk is available: "${IP}:8000"
 
-moo!
 MOO
-
