@@ -12,12 +12,12 @@ sudo ${SPLUNK_BIN} start --accept-license
 # Load data into Splunk
 if [ -d "${DATA_DIR}" ]; then
     # Setup Splunk index, and load sample data
-    ${SPLUNK_BIN} add index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
+    sudo ${SPLUNK_BIN} add index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
   
     # Any .log files in the directory will be loaded
     for f in ${PROV_DIR}/data/*.log
     do
-        ${SPLUNK_BIN} add oneshot "$f" -index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
+        sudo ${SPLUNK_BIN} add oneshot "$f" -index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
     done
 fi
 

@@ -7,6 +7,7 @@ for quick data analysis, or to test out some new configuration ideas.
 
 ## Prerequisites
 ###### Vagrant
+Vagrant 1.8.1+
 Install Vagrant see https://docs.vagrantup.com/v2/installation/index.html
 
 ###### Splunk
