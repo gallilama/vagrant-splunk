@@ -15,13 +15,14 @@ if [ -d "${DATA_DIR}" ]; then
     sudo ${SPLUNK_BIN} add index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
   
     # Any .log files in the directory will be loaded
-    for f in ${PROV_DIR}/data/*.log
-    do
-        sudo ${SPLUNK_BIN} add oneshot "$f" -index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
+    for f in ${DATA_DIR}/*.log; do
+        if [ -e "$f" ]; then
+            sudo ${SPLUNK_BIN} add oneshot "$f" -index ${SPLUNK_INDEX} -auth ${SPLUNK_AUTH}
+        fi
     done
 fi
 
-IP=$(ifconfig eth1 | sed -ne 's/.*inet addr:\([0-9.]\+\) .*/\1/p')
+IP=$(ifconfig enp0s8 | sed -ne 's/.*inet addr:\([0-9.]\+\) .*/\1/p')
 
 cowsay <<MOO
 

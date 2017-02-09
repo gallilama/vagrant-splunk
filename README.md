@@ -1,5 +1,5 @@
 # vagrant-splunk
-Ubuntu 14.04 VM with Splunk Enterprise, 2048 GB of RAM and 2 CPUs.
+Ubuntu 16.04 VM with Splunk Enterprise, 2048 GB of RAM and 2 CPUs.
 
 I use Splunk for various problems and research projects.
 I find the ability to quickly build an instance of these tools handy
@@ -7,7 +7,7 @@ for quick data analysis, or to test out some new configuration ideas.
 
 ## Prerequisites
 ###### Vagrant
-Vagrant 1.8.1+
+Vagrant 1.9.1+
 Install Vagrant see https://docs.vagrantup.com/v2/installation/index.html
 
 ###### Splunk
