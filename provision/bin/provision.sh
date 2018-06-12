@@ -3,6 +3,7 @@
 # Provision script that performs setup of Splunk and loads data.
 
 # Install the necessities
+sudo apt-get update
 sudo apt-get -y install cowsay > /dev/null 2>&1 
 sudo dpkg -i /vagrant/provision/lib/${SPLUNK_DEB}
 
