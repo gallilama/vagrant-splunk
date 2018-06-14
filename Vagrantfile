@@ -11,9 +11,13 @@ VM_NAME = "splunk-sandbox"
 VM_MEMORY = 2048
 VM_CPUS = 2
 # Set to the .deb you're using, and place .deb in the provision/lib directory
-SPLUNK_DEB = "splunk-6.3.0-aa7d4b1ccb80-linux-2.6-amd64.deb"
+SPLUNK_DEB = "splunk-7.1.1-8f0ead9ec3db-linux-2.6-amd64.deb"
 # provision/data/*.log are one-shot loaded to this index
 SPLUNK_INDEX = "metrics"
+# this is the password you will set for your splunk admin user
+SPLUNK_PASS  = "P@$$w0rd"
+# Splunk home directory
+SPLUNK_HOME  = "/opt/splunk"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
@@ -36,8 +40,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.env = {
       :SPLUNK_DEB   => "#{SPLUNK_DEB}",
       :SPLUNK_INDEX => "#{SPLUNK_INDEX}",
-      :SPLUNK_BIN   => "/opt/splunk/bin/splunk",
-      :SPLUNK_AUTH  => "admin:changeme",      
+      :SPLUNK_HOME  => "#{SPLUNK_HOME}",
+      :SPLUNK_BIN   => "#{SPLUNK_HOME}/bin/splunk",
+      :SPLUNK_PASS  => "#{SPLUNK_PASS}",
+      :SPLUNK_AUTH  => "admin:#{SPLUNK_PASS}",
       :DATA_DIR     => '/vagrant/provision/data'
     }
   end
